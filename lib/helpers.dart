@@ -20,8 +20,7 @@ extension CountryExtensions on List<Country> {
       (country) => isNumeric(search) || search.startsWith("+")
           ? country.dialCode.contains(search)
           : removeDiacritics(country.name.replaceAll("+", "").toLowerCase()).contains(search) ||
-              country.nameTranslations.values
-                  .any((element) => removeDiacritics(element.toLowerCase()).contains(search)),
+              (country.nameTranslations['ar'] != null && country.nameTranslations['ar']!.contains(search)),
     ).toList();
   }
 }
